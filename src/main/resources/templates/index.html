@@ -4,55 +4,75 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script th:src="@{/js/jQuery-v2_1_4.js}" ></script>
+    <style type="text/css">
+        #data_ul li{cursor: pointer; padding: 5px 10px; float: left;list-style-type: none; background: #a8b5e4;margin: 10px 0 0 10px; border-radius: 3px;}
+    </style>
 </head>
 <body>
 <ul id="data_ul">
-    <li id="11">北京市</li>
-    <li>天津市</li>
-</ul>
+    <li id="11" data-load="false">北京市</li>
+    <li id="12" data-load="false">天津市</li>
+    <li id="13" data-load="false">河北省</li>
+    <li id="14" data-load="false">山西省</li>
+    <li id="15" data-load="false">内蒙古自治区</li>
+    <li id="21" data-load="false">辽宁省</li>
+    <li id="22" data-load="false">吉林省</li>
+    <li id="23" data-load="false">黑龙江省</li>
+    <li id="31" data-load="false">上海市</li>
+    <li id="32" data-load="false">江苏省</li>
+    <li id="33" data-load="false">浙江省</li>
+    <li id="34" data-load="false">安徽省</li>
+    <li id="35" data-load="false">福建省</li>
+    <li id="36" data-load="false">江西省</li>
+    <li id="37" data-load="false">山东省</li>
+    <li id="41" data-load="false">河南省</li>
+    <li id="42" data-load="false">湖北省</li>
+    <li id="43" data-load="false">湖南省</li>
+    <li id="44" data-load="false">广东省</li>
+    <li id="45" data-load="false">广西壮族自治区</li>
+    <li id="46" data-load="false">海南省</li>
+    <li id="50" data-load="false">重庆市</li>
+    <li id="51" data-load="false">四川省</li>
+    <li id="52" data-load="false">贵州省</li>
+    <li id="53" data-load="false">云南省</li>
+    <li id="54" data-load="false">西藏自治区</li>
+    <li id="61" data-load="false">陕西省</li>
+    <li id="62" data-load="false">甘肃省</li>
+    <li id="63" data-load="false">青海省</li>
+    <li id="64" data-load="false">宁夏回族自治区</li>
+    <li id="65" data-load="false">新疆维吾尔自治区</li>
 
-河北省
-山西省
-内蒙古自治区
-辽宁省
-吉林省
-黑龙江省
-上海市
-江苏省
-浙江省
-安徽省
-福建省
-江西省
-山东省
-河南省
-湖北省
-湖南省
-广东省
-广西壮族自治区
-海南省
-重庆市
-四川省
-贵州省
-云南省
-西藏自治区
-陕西省
-甘肃省
-青海省
-宁夏回族自治区
-新疆维吾尔自治区
+</ul>
 
 <script type="text/javascript">
     $(function () {
-        $("#data_ul li").on("click", function f() {
+        $("#data_ul li").on("click", function () {
             var id = this.id;
-            console.log(id);
-            saveData(id);
+            var name = $(this).text();
+            var load_flag = $(this).data("load");
+            console.log(id,name, load_flag);
+            if(!load_flag){
+                saveData(id, name);
+            }else {
+                console.log("保存中...")
+            }
         });
     });
 
-    function saveData(code) {
-        $.post("/area/saveData",{"code":code},function(result){
+    function saveData(code,name) {
+        $("#" + code).css("background","#a8a8ab");
+        $("#" + code).css("cursor", "text");
+        $("#" + code).data("load", true);
+        $.post("/area/saveData",{"code":code,"name":name},function(result){
             console.log(result);
+            if(result){
+                //成功
+                $("#" + code).css("background", "#2bde74e0")
+            }else {
+                $("#" + code).css("background", "#fd4a4a")
+            }
+            $("#" + code).data("load", false);
+            $("#" + code).css("cursor", "pointer");
         });
     }
 

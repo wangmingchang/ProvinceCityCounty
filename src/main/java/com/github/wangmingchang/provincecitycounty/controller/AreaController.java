@@ -26,10 +26,11 @@ public class AreaController {
     }
 
     @RequestMapping(value = "/saveData", method = RequestMethod.POST)
-    public String saveData(HttpServletRequest request){
+    public boolean saveData(HttpServletRequest request){
         String code = request.getParameter("code");
-        areaService.saveData(code);
-        return null;
+        String name = request.getParameter("name");
+        boolean flag = areaService.saveData(code, name);
+        return flag;
     }
 
 }

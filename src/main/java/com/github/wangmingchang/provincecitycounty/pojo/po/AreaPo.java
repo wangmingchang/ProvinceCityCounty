@@ -15,6 +15,14 @@ public class AreaPo {
 	private String name; // 行政名称
 	private Date createTime; // 创建时间
 
+	public AreaPo(String code, String parentCode, String name) {
+		this.code = code;
+		this.parentCode = parentCode;
+		this.name = name;
+	}
+	public AreaPo() {
+	}
+
 	public String getCode() {
 		return code;
 	}

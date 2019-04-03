@@ -10,6 +10,7 @@ public interface AreaService {
     /**
      * 保存地区数据
      * @param code
+     * @param name
      */
-    void saveData(String code);
+    boolean saveData(String code, String name);
 }
