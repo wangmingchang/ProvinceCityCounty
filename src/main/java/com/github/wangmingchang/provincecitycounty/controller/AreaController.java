@@ -31,7 +31,12 @@ public class AreaController {
     public boolean saveData(HttpServletRequest request){
         String code = request.getParameter("code");
         String name = request.getParameter("name");
-        boolean flag = areaService.saveData(code, name);
+        boolean flag = false;
+        try {
+            flag = areaService.saveData(code, name);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return flag;
     }
 
