@@ -5,11 +5,20 @@
     <title>Title</title>
     <script th:src="@{/js/jQuery-v2_1_4.js}" ></script>
     <style type="text/css">
+        #data_ul{padding-left: 0px;}
         #data_ul li{cursor: pointer; padding: 5px 10px; float: left;list-style-type: none; background: #a8b5e4;margin: 10px 0 0 10px; border-radius: 3px;}
+        .left_div{float: left; margin: 5px 5px;}
     </style>
 </head>
 <body>
 <h2>拉取国家省市区县镇村的行政代码和地区名称</h2>
+<div style="height: 30px;">
+    <div>
+        <div class="left_div"><div style="height: 25px;width: 80px; background:#2bde74e0; float: left; margin-right: 5px;"></div><label>保存成功</label></div>
+        <div class="left_div"><div style="height: 25px;width: 80px; background:#a8a8ab; float: left; margin-right: 5px;"></div><label>保存中</label></div>
+        <div class="left_div"><div style="height: 25px;width: 80px; background:#fd4a4a; float: left; margin-right: 5px;"></div><label>保存失败</label></div>
+    </div>
+</div>
 <ul id="data_ul">
     <li id="11" data-load="false">北京市</li>
     <li id="12" data-load="false">天津市</li>
