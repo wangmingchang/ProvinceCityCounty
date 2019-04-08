@@ -29,11 +29,15 @@ public class AreaServiceImpl implements AreaService {
     private static String CITY_PREFIX_URL = "CITY_PREFIX_URL";
     private static String COUNTY_PREFIX_URL = "COUNTY_PREFIX_URL";
     private static String TOWN_PREFIX_URL = "TOWN_PREFIX_URL";
-    private static String[] SUFFIX_NAME_ARR = {"社区居委会", "村委会"};
+    private static String[] SUFFIX_NAME_ARR = {"社区居委会", "社区居民委员会","社区居居委会", "村委会", "居委会","村民委员会","社区居委会（筹）"};
     private static String VILLAGE_NAME = "村";
     private static String STREET_NAME = "街";
+    private static String GARDEN_NAME = "苑";
+    private static String LANE_NAME = "坊";
     private static String[] STREET_REPETITION_NAME_ARR = {"街村"};
     private static String[] VILLAGE_REPETITION_NAME_ARR = {"村村"};
+    private static String[] GARDEN_REPETITION_NAME_ARR = {"苑村","居村"};
+    private static String[] LANE_REPETITION_NAME_ARR= {"坊村"};
     private static String[] OFFICE_NAME_ARR = {"办事处"};
 
     @Autowired
@@ -150,21 +154,28 @@ public class AreaServiceImpl implements AreaService {
         String name = null;
         if (currntNum == 4) {
             name = getTdText(tds.get(2), currntNum);
-            if(StringUtil.indexOf(name, SUFFIX_NAME_ARR)){
+            if (StringUtil.indexOf(name, SUFFIX_NAME_ARR)) {
                 name = StringUtil.replaceCustomBlank(name, SUFFIX_NAME_ARR, VILLAGE_NAME);
-                if(StringUtil.indexOf(name, STREET_REPETITION_NAME_ARR)){
+                if (StringUtil.indexOf(name, STREET_REPETITION_NAME_ARR)) {
                     name = StringUtil.replaceCustomBlank(name, STREET_REPETITION_NAME_ARR, STREET_NAME);
-                }else if(StringUtil.indexOf(name, VILLAGE_REPETITION_NAME_ARR)){
+                } else if (StringUtil.indexOf(name, VILLAGE_REPETITION_NAME_ARR)) {
                     name = StringUtil.replaceCustomBlank(name, VILLAGE_REPETITION_NAME_ARR, VILLAGE_NAME);
+                } else if (StringUtil.indexOf(name, GARDEN_REPETITION_NAME_ARR)) {
+                    name = StringUtil.replaceCustomBlank(name, GARDEN_REPETITION_NAME_ARR, GARDEN_NAME);
+                }else if(StringUtil.indexOf(name, LANE_REPETITION_NAME_ARR)){
+                    name = StringUtil.replaceCustomBlank(name, LANE_REPETITION_NAME_ARR, LANE_NAME);
                 }
             }
-        } else if(currntNum == 3){
+        } else if (currntNum == 3) {
             name = getTdText(tds.get(1), currntNum);
-            if(StringUtil.indexOf(name, OFFICE_NAME_ARR)){
+            if (StringUtil.indexOf(name, OFFICE_NAME_ARR)) {
                 name = StringUtil.replaceCustomBlank(name, OFFICE_NAME_ARR, "");
             }
-        }else {
+        } else {
             name = getTdText(tds.get(1), currntNum);
+        }
+        if (StringUtil.isBlank(name)) {
+            throw new RuntimeException("code:" + code + ",currntNum:" + currntNum + " 获取名称为空, tds:" + tds);
         }
         AreaPo areaPo = areaDao.selectByPrimaryKey(code);
         //先删除，再新增
@@ -173,7 +184,8 @@ public class AreaServiceImpl implements AreaService {
         }
         areaPo = new AreaPo(code, parentCode, name);
         int num = areaDao.insertSelective(areaPo);
-        System.out.println("保存返回影响行数：" + num + "，code：" + code + "，name:" + name + "，下一级URL:" + nextUrl);
+        long threadId = Thread.currentThread().getId();
+        System.out.println("线程id:" + threadId + "，保存返回影响行数：" + num + "，code：" + code + "，name:" + name + "，下一级URL:" + nextUrl);
         map.put(NEXT_URL, nextUrl);
         map.put(PARENT_CODE, code);
         return map;
@@ -187,12 +199,29 @@ public class AreaServiceImpl implements AreaService {
      * @return
      */
     private String getTdText(Element element, int currntNum) {
+        System.out.println("element:" + element + ",currentNum:" + currntNum);
         String text = null;
         if (currntNum == 4) {
             text = element.text();
+            if (StringUtil.isBlank(text)) {
+                text = element.html();
+            }
         } else {
             Elements aElement = element.getElementsByTag("a");
-            text = aElement.get(0).text();
+            if (null != aElement && aElement.size() > 0) {
+                text = aElement.get(0).text();
+                if (StringUtil.isBlank(text)) {
+                    text = aElement.get(0).html();
+                }
+            } else {
+                text = element.text();
+                if (StringUtil.isBlank(text)) {
+                    text = element.html();
+                }
+            }
+        }
+        if (StringUtil.isBlank(text)) {
+            System.out.println(text);
         }
         return text;
     }

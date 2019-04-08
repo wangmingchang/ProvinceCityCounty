@@ -99,6 +99,10 @@ public class StringUtil extends StringUtils {
 
         for (int i = 0; i < sourceArr.length; i++) {
             char c = sourceArr[i];
+            if(j != 0 && c == regexArr[0] && regexArr[j -1] != regexArr[j]){
+                //去除相邻的两个字是相同的字，eg:"村村"
+                j = 0;
+            }
             if (c == regexArr[j] && j < regexArr.length) {
                 if (j == 0) {
                     map.put(START_INDEX_KEY, i);
