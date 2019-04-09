@@ -131,6 +131,7 @@ public class AreaServiceImpl implements AreaService {
         areaUpdateLogPo.setCode(code);
         areaUpdateLogDao.insertSelective(areaUpdateLogPo);
         flag = true;
+        LOG.info("================执行完成===============");
         return flag;
     }
 

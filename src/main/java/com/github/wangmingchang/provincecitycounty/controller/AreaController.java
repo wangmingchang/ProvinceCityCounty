@@ -3,9 +3,11 @@ package com.github.wangmingchang.provincecitycounty.controller;
 import com.github.wangmingchang.provincecitycounty.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,10 +24,10 @@ public class AreaController {
     private AreaService areaService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(HttpServletRequest request){
-        request.setAttribute("name","123456");
-
-        return "index";
+    public ModelAndView index(ModelMap modelMap){
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("name","abcke");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/saveData", method = RequestMethod.POST)
