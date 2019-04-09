@@ -3,13 +3,17 @@ package com.github.wangmingchang.provincecitycounty.service.impl;
 import com.github.wangmingchang.provincecitycounty.common.HttpUtil;
 import com.github.wangmingchang.provincecitycounty.common.StringUtil;
 import com.github.wangmingchang.provincecitycounty.dao.AreaDao;
+import com.github.wangmingchang.provincecitycounty.dao.AreaUpdateLogDao;
 import com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo;
+import com.github.wangmingchang.provincecitycounty.pojo.po.AreaUpdateLogPo;
 import com.github.wangmingchang.provincecitycounty.service.AreaService;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +27,7 @@ import java.util.Map;
 @Service
 public class AreaServiceImpl implements AreaService {
 
+    private static Logger LOG = LoggerFactory.getLogger(AreaServiceImpl.class);
     private static String URL = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2018/";
     private static String PARENT_CODE = "PARENT_CODE";
     private static String NEXT_URL = "NEXT_URL";
@@ -42,8 +47,6 @@ public class AreaServiceImpl implements AreaService {
 
     @Autowired
     private AreaDao areaDao;
-
-
     /**
      * 保存地区数据
      *
@@ -62,8 +65,11 @@ public class AreaServiceImpl implements AreaService {
         //省
         provinceAreaPo = new AreaPo(code, null, name);
         int provinceNum = areaDao.insertSelective(provinceAreaPo);
-        System.out.println("保存省返回影响行数：" + provinceNum + "省code：" + code + "，省name:" + name + "，下一级URL:" + cityUrl);
+        LOG.info("保存省返回影响行数：" + provinceNum + "省code：" + code + "，省name:" + name + "，下一级URL:" + cityUrl);
         String cityHtml = HttpUtil.doGet(cityUrl);
+        if(StringUtil.isBlank(cityHtml)){
+            return flag;
+        }
         Document cityDoc = Jsoup.parse(cityHtml);
         Elements citytr = cityDoc.getElementsByClass("citytr");
         for (Element element : citytr) {
@@ -76,6 +82,9 @@ public class AreaServiceImpl implements AreaService {
                 //有下一级，区、县
                 countyUrl = URL + countyUrl;
                 String countyHtml = HttpUtil.doGet(countyUrl);
+                if(StringUtil.isBlank(countyHtml)){
+                    return flag;
+                }
                 Document countyDoc = Jsoup.parse(countyHtml);
                 Elements countytr = countyDoc.getElementsByClass("countytr");
                 for (Element coutyElement : countytr) {
@@ -87,6 +96,9 @@ public class AreaServiceImpl implements AreaService {
                     if (StringUtils.isNoneBlank(townUrl)) {
                         townUrl = URL + townUrl;
                         String townHtml = HttpUtil.doGet(townUrl);
+                        if(StringUtil.isBlank(townHtml)){
+                            return flag;
+                        }
                         Document townDoc = Jsoup.parse(townHtml);
                         Elements towntr = townDoc.getElementsByClass("towntr");
                         for (Element townElement : towntr) {
@@ -99,6 +111,9 @@ public class AreaServiceImpl implements AreaService {
                                 //村信息
                                 villageUrl = URL + villageUrl;
                                 String villageHtml = HttpUtil.doGet(villageUrl);
+                                if(StringUtil.isBlank(villageHtml)){
+                                    return flag;
+                                }
                                 Document villageDoc = Jsoup.parse(villageHtml);
                                 Elements villagetr = villageDoc.getElementsByClass("villagetr");
                                 for (Element villageElement : villagetr) {
@@ -112,9 +127,16 @@ public class AreaServiceImpl implements AreaService {
 
             }
         }
+        AreaUpdateLogPo areaUpdateLogPo = new AreaUpdateLogPo();
+        areaUpdateLogPo.setCode(code);
+        areaUpdateLogDao.insertSelective(areaUpdateLogPo);
         flag = true;
         return flag;
     }
+
+    @Autowired
+    private AreaUpdateLogDao areaUpdateLogDao;
+
 
     /**
      * 保存区、县、镇、村数据
@@ -185,7 +207,7 @@ public class AreaServiceImpl implements AreaService {
         areaPo = new AreaPo(code, parentCode, name);
         int num = areaDao.insertSelective(areaPo);
         long threadId = Thread.currentThread().getId();
-        System.out.println("线程id:" + threadId + "，保存返回影响行数：" + num + "，code：" + code + "，name:" + name + "，下一级URL:" + nextUrl);
+        LOG.info("线程id:" + threadId + "，保存返回影响行数：" + num + "，code：" + code + "，name:" + name + "，下一级URL:" + nextUrl);
         map.put(NEXT_URL, nextUrl);
         map.put(PARENT_CODE, code);
         return map;
@@ -199,7 +221,7 @@ public class AreaServiceImpl implements AreaService {
      * @return
      */
     private String getTdText(Element element, int currntNum) {
-        System.out.println("element:" + element + ",currentNum:" + currntNum);
+         LOG.info("element:" + element + ",currentNum:" + currntNum);
         String text = null;
         if (currntNum == 4) {
             text = element.text();
@@ -219,9 +241,6 @@ public class AreaServiceImpl implements AreaService {
                     text = element.html();
                 }
             }
-        }
-        if (StringUtil.isBlank(text)) {
-            System.out.println(text);
         }
         return text;
     }

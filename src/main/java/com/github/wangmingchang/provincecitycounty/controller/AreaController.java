@@ -22,7 +22,9 @@ public class AreaController {
     private AreaService areaService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(){
+    public String index(HttpServletRequest request){
+        request.setAttribute("name","123456");
+
         return "index";
     }
 
