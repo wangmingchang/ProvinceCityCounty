@@ -1,5 +1,6 @@
 package com.github.wangmingchang.provincecitycounty.service;
 
+import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaSaveVo;
 import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaUpdateLogVo;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface AreaService {
      * @param code
      * @param name
      */
-    boolean saveData(String code, String name);
+    AreaSaveVo saveData(String code, String name);
 
     /**
      * 查询更新日志

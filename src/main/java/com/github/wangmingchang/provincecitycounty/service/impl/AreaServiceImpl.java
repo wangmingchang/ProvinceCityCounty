@@ -6,6 +6,7 @@ import com.github.wangmingchang.provincecitycounty.dao.AreaDao;
 import com.github.wangmingchang.provincecitycounty.dao.AreaUpdateLogDao;
 import com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo;
 import com.github.wangmingchang.provincecitycounty.pojo.po.AreaUpdateLogPo;
+import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaSaveVo;
 import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaUpdateLogVo;
 import com.github.wangmingchang.provincecitycounty.service.AreaService;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,8 +61,8 @@ public class AreaServiceImpl implements AreaService {
      * @param name
      */
     @Override
-    public boolean saveData(String code, String name) {
-        boolean flag = false;
+    public AreaSaveVo saveData(String code, String name) {
+        AreaSaveVo areaSaveVo = new AreaSaveVo();
         String cityUrl = URL + code + ".html";
         AreaPo provinceAreaPo = areaDao.selectByPrimaryKey(code);
         if (null != provinceAreaPo) {
@@ -72,7 +75,7 @@ public class AreaServiceImpl implements AreaService {
         LOG.info("保存省返回影响行数：" + provinceNum + "省code：" + code + "，省name:" + name + "，下一级URL:" + cityUrl);
         String cityHtml = HttpUtil.doGet(cityUrl);
         if(StringUtil.isBlank(cityHtml)){
-            return flag;
+            return areaSaveVo;
         }
         Document cityDoc = Jsoup.parse(cityHtml);
         Elements citytr = cityDoc.getElementsByClass("citytr");
@@ -87,7 +90,7 @@ public class AreaServiceImpl implements AreaService {
                 countyUrl = URL + countyUrl;
                 String countyHtml = HttpUtil.doGet(countyUrl);
                 if(StringUtil.isBlank(countyHtml)){
-                    return flag;
+                    return areaSaveVo;
                 }
                 Document countyDoc = Jsoup.parse(countyHtml);
                 Elements countytr = countyDoc.getElementsByClass("countytr");
@@ -101,7 +104,7 @@ public class AreaServiceImpl implements AreaService {
                         townUrl = URL + townUrl;
                         String townHtml = HttpUtil.doGet(townUrl);
                         if(StringUtil.isBlank(townHtml)){
-                            return flag;
+                            return areaSaveVo;
                         }
                         Document townDoc = Jsoup.parse(townHtml);
                         Elements towntr = townDoc.getElementsByClass("towntr");
@@ -116,7 +119,7 @@ public class AreaServiceImpl implements AreaService {
                                 villageUrl = URL + villageUrl;
                                 String villageHtml = HttpUtil.doGet(villageUrl);
                                 if(StringUtil.isBlank(villageHtml)){
-                                    return flag;
+                                    return areaSaveVo;
                                 }
                                 Document villageDoc = Jsoup.parse(villageHtml);
                                 Elements villagetr = villageDoc.getElementsByClass("villagetr");
@@ -134,9 +137,14 @@ public class AreaServiceImpl implements AreaService {
         AreaUpdateLogPo areaUpdateLogPo = new AreaUpdateLogPo();
         areaUpdateLogPo.setCode(code);
         areaUpdateLogDao.insertSelective(areaUpdateLogPo);
-        flag = true;
+        areaSaveVo.setFlag(true);
+        String updateTime = "更新时间为：";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(new Date());
+        updateTime = updateTime + format;
+        areaSaveVo.setUpdateTime(updateTime);
         LOG.info("================执行完成===============");
-        return flag;
+        return areaSaveVo;
     }
 
     /**

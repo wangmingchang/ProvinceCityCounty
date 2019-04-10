@@ -29,7 +29,7 @@
     </div>
 </div>
 <ul id="data_ul">
-    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '11'>${areaUpdateLogVo.updateTime}</#if></#list></#if>"  id="11" data-load="false">北京市</li>
+    <li data-toggle="tooltip" data-test="kdlld" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '11'>${areaUpdateLogVo.updateTime}</#if></#list></#if>"  id="11" data-load="false">北京市</li>
     <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '12'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="12" data-load="false">天津市</li>
     <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '13'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="13" data-load="false">河北省</li>
     <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '14'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="14" data-load="false">山西省</li>
@@ -84,11 +84,11 @@
         $("#" + code).css("background","#a8a8ab");
         $("#" + code).css("cursor", "text");
         $("#" + code).data("load", true);
-        $.post("/area/saveData",{"code":code,"name":name},function(result){
-            console.log(result);
-            if(result){
+        $.post("/area/saveData",{"code":code,"name":name},function(areaSaveVo){
+            if(areaSaveVo != null && areaSaveVo.flag == true){
                 //成功
-                $("#" + code).css("background", "#2bde74e0")
+                $("#" + code).css("background", "#2bde74e0");
+                $("#" + code).attr("data-original-title", areaSaveVo.updateTime);
             }else {
                 $("#" + code).css("background", "#fd4a4a")
             }

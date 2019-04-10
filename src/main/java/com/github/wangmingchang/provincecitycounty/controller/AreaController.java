@@ -1,5 +1,6 @@
 package com.github.wangmingchang.provincecitycounty.controller;
 
+import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaSaveVo;
 import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaUpdateLogVo;
 import com.github.wangmingchang.provincecitycounty.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,16 +37,22 @@ public class AreaController {
 
     @RequestMapping(value = "/saveData", method = RequestMethod.POST)
     @ResponseBody
-    public boolean saveData(HttpServletRequest request){
+    public AreaSaveVo saveData(HttpServletRequest request){
         String code = request.getParameter("code");
         String name = request.getParameter("name");
-        boolean flag = false;
-        try {
-            flag = areaService.saveData(code, name);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return flag;
+        AreaSaveVo areaSaveVo = new AreaSaveVo();
+        areaSaveVo.setFlag(true);
+        String updateTime = "更新时间为：";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(new Date());
+        updateTime = updateTime + format;
+        areaSaveVo.setUpdateTime(updateTime);
+//        try {
+//            areaSaveVo = areaService.saveData(code, name);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+        return areaSaveVo;
     }
 
 }
