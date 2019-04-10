@@ -1,15 +1,16 @@
 package com.github.wangmingchang.provincecitycounty.controller;
 
+import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaUpdateLogVo;
 import com.github.wangmingchang.provincecitycounty.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 地区-controller
@@ -24,9 +25,10 @@ public class AreaController {
     private AreaService areaService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView index(ModelMap modelMap){
+    public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("name","abcke");
+        List<AreaUpdateLogVo> areaUpdateLogVos = areaService.queryUpdateLog();
+        modelAndView.addObject("areaUpdateLogVos",areaUpdateLogVos);
         return modelAndView;
     }
 

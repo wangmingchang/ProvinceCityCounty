@@ -6,6 +6,7 @@ import com.github.wangmingchang.provincecitycounty.dao.AreaDao;
 import com.github.wangmingchang.provincecitycounty.dao.AreaUpdateLogDao;
 import com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo;
 import com.github.wangmingchang.provincecitycounty.pojo.po.AreaUpdateLogPo;
+import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaUpdateLogVo;
 import com.github.wangmingchang.provincecitycounty.service.AreaService;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,6 +49,8 @@ public class AreaServiceImpl implements AreaService {
 
     @Autowired
     private AreaDao areaDao;
+    @Autowired
+    private AreaUpdateLogDao areaUpdateLogDao;
     /**
      * 保存地区数据
      *
@@ -134,10 +138,6 @@ public class AreaServiceImpl implements AreaService {
         LOG.info("================执行完成===============");
         return flag;
     }
-
-    @Autowired
-    private AreaUpdateLogDao areaUpdateLogDao;
-
 
     /**
      * 保存区、县、镇、村数据
@@ -246,4 +246,13 @@ public class AreaServiceImpl implements AreaService {
         return text;
     }
 
+    /**
+     * 查询更新日志
+     *
+     * @return
+     */
+    @Override
+    public List<AreaUpdateLogVo> queryUpdateLog() {
+        return areaUpdateLogDao.queryUpdateLog();
+    }
 }

@@ -1,6 +1,7 @@
 package com.github.wangmingchang.provincecitycounty.dao;
 
 import com.github.wangmingchang.provincecitycounty.pojo.po.AreaUpdateLogPo;
+import com.github.wangmingchang.provincecitycounty.pojo.vo.AreaUpdateLogVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface AreaUpdateLogDao {
 	int updateByPrimaryKeySelective(AreaUpdateLogPo areaUpdateLogPo);
 	
 	int updateByPrimaryKey(AreaUpdateLogPo areaUpdateLogPo);
+
+	List<AreaUpdateLogVo> queryUpdateLog();
 }

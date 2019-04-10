@@ -29,37 +29,37 @@
     </div>
 </div>
 <ul id="data_ul">
-    <li data-toggle="tooltip" title=""  id="11" data-load="false">北京市</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="12" data-load="false">天津市</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="13" data-load="false">河北省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="14" data-load="false">山西省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="15" data-load="false">内蒙古自治区</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="21" data-load="false">辽宁省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="22" data-load="false">吉林省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="23" data-load="false">黑龙江省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="31" data-load="false">上海市</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="32" data-load="false">江苏省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="33" data-load="false">浙江省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="34" data-load="false">安徽省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="35" data-load="false">福建省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="36" data-load="false">江西省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="37" data-load="false">山东省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="41" data-load="false">河南省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="42" data-load="false">湖北省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="43" data-load="false">湖南省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="44" data-load="false">广东省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="45" data-load="false">广西壮族自治区</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="46" data-load="false">海南省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="50" data-load="false">重庆市</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="51" data-load="false">四川省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="52" data-load="false">贵州省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="53" data-load="false">云南省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="54" data-load="false">西藏自治区</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="61" data-load="false">陕西省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="62" data-load="false">甘肃省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="63" data-load="false">青海省</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="64" data-load="false">宁夏回族自治区</li>
-    <li data-toggle="tooltip" title="更新时间：12452" id="65" data-load="false">新疆维吾尔自治区</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '11'>${areaUpdateLogVo.updateTime}</#if></#list></#if>"  id="11" data-load="false">北京市</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '12'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="12" data-load="false">天津市</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '13'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="13" data-load="false">河北省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '14'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="14" data-load="false">山西省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '15'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="15" data-load="false">内蒙古自治区</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '21'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="21" data-load="false">辽宁省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '22'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="22" data-load="false">吉林省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '23'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="23" data-load="false">黑龙江省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '31'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="31" data-load="false">上海市</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '32'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="32" data-load="false">江苏省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '33'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="33" data-load="false">浙江省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '34'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="34" data-load="false">安徽省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '35'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="35" data-load="false">福建省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '36'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="36" data-load="false">江西省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '37'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="37" data-load="false">山东省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '41'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="41" data-load="false">河南省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '42'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="42" data-load="false">湖北省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '43'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="43" data-load="false">湖南省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '44'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="44" data-load="false">广东省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '45'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="45" data-load="false">广西壮族自治区</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '46'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="46" data-load="false">海南省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '50'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="50" data-load="false">重庆市</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '51'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="51" data-load="false">四川省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '52'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="52" data-load="false">贵州省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '53'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="53" data-load="false">云南省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '54'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="54" data-load="false">西藏自治区</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '61'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="61" data-load="false">陕西省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '62'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="62" data-load="false">甘肃省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '63'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="63" data-load="false">青海省</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '64'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="64" data-load="false">宁夏回族自治区</li>
+    <li data-toggle="tooltip" title="<#if areaUpdateLogVos?exists><#list areaUpdateLogVos as areaUpdateLogVo><#if areaUpdateLogVo.code == '65'>${areaUpdateLogVo.updateTime}</#if></#list></#if>" id="65" data-load="false">新疆维吾尔自治区</li>
 
 </ul>
 
