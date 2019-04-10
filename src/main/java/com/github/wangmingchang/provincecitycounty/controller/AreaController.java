@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,17 +39,11 @@ public class AreaController {
         String code = request.getParameter("code");
         String name = request.getParameter("name");
         AreaSaveVo areaSaveVo = new AreaSaveVo();
-        areaSaveVo.setFlag(true);
-        String updateTime = "更新时间为：";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = simpleDateFormat.format(new Date());
-        updateTime = updateTime + format;
-        areaSaveVo.setUpdateTime(updateTime);
-//        try {
-//            areaSaveVo = areaService.saveData(code, name);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        try {
+            areaSaveVo = areaService.saveData(code, name);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return areaSaveVo;
     }
 
