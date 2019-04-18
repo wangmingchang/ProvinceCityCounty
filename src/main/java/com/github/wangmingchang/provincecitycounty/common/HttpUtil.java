@@ -47,13 +47,13 @@ public class HttpUtil {
 
             // 创建http GET请求
             HttpGet httpGet = new HttpGet(uri);
-            httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36");
-            httpGet.setHeader("X-Requested-With","XMLHttpRequest");
-            httpGet.setHeader("Accept","text/html, */*; q=0.01");
-            httpGet.setHeader("Accept-Encoding","gzip, deflate");
-            httpGet.setHeader("Accept-Language","zh-CN,zh;q=0.9");
-            httpGet.setHeader("X-Requested-With","XMLHttpRequest");
-            httpGet.setHeader("X-Requested-With","XMLHttpRequest");
+            httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36");
+            httpGet.setHeader("X-Requested-With", "XMLHttpRequest");
+            httpGet.setHeader("Accept", "text/html, */*; q=0.01");
+            httpGet.setHeader("Accept-Encoding", "gzip, deflate");
+            httpGet.setHeader("Accept-Language", "zh-CN,zh;q=0.9");
+            httpGet.setHeader("X-Requested-With", "XMLHttpRequest");
+            httpGet.setHeader("X-Requested-With", "XMLHttpRequest");
 
             // 执行请求
             response = httpclient.execute(httpGet);
@@ -79,15 +79,16 @@ public class HttpUtil {
     public static String doGet(String url) {
         return doGet(url, null);
     }
-    public static String sendGET(String url,String param){
-        String result="";//访问返回结果
-        BufferedReader read=null;//读取访问结果
+
+    public static String sendGET(String url, String param) {
+        String result = "";//访问返回结果
+        BufferedReader read = null;//读取访问结果
 
         try {
             //创建url
-            URL realurl=new URL(url+"?"+param);
+            URL realurl = new URL(url + "?" + param);
             //打开连接
-            URLConnection connection=realurl.openConnection();
+            URLConnection connection = realurl.openConnection();
             // 设置通用的请求属性
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
@@ -103,15 +104,15 @@ public class HttpUtil {
             }
             // 定义 BufferedReader输入流来读取URL的响应
             read = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream(),"UTF-8"));
+                    connection.getInputStream(), "UTF-8"));
             String line;//循环读取
             while ((line = read.readLine()) != null) {
                 result += line;
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
-            if(read!=null){//关闭流
+        } finally {
+            if (read != null) {//关闭流
                 try {
                     read.close();
                 } catch (IOException e) {
@@ -190,7 +191,7 @@ public class HttpUtil {
         return resultString;
     }
 
-    public static void main(String[] arg){
+    public static void main(String[] arg) {
         String url = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2018/11.html";
         String result = HttpUtil.doGet(url);
         System.out.println(result);

@@ -99,7 +99,7 @@ public class StringUtil extends StringUtils {
 
         for (int i = 0; i < sourceArr.length; i++) {
             char c = sourceArr[i];
-            if(j != 0 && c == regexArr[0] && regexArr[j -1] != regexArr[j]){
+            if (j != 0 && c == regexArr[0] && regexArr[j - 1] != regexArr[j]) {
                 //去除相邻的两个字是相同的字，eg:"村村"
                 j = 0;
             }
@@ -299,16 +299,17 @@ public class StringUtil extends StringUtils {
 
     /**
      * 去除${}符号
-     * @author wangmingchang
-     * @date 2019/1/29 15:02
+     *
      * @param str
      * @return
+     * @author wangmingchang
+     * @date 2019/1/29 15:02
      **/
     public static String removeSymbol(String str) {
         String[] arr = str.split("\\$\\{");
-        if(arr.length > 1){
+        if (arr.length > 1) {
             arr = arr[1].split("}");
-        }else {
+        } else {
             arr = arr[0].split("}");
         }
         return arr[0];
@@ -317,22 +318,23 @@ public class StringUtil extends StringUtils {
 
     /**
      * 合成字符串
+     *
      * @param start
      * @param centre
      * @param end
      * @return
      */
-    public static String compound(String start, String centre, String end){
+    public static String compound(String start, String centre, String end) {
         return start + centre + end;
     }
 
-    public static void main(String[] agr){
+    public static void main(String[] agr) {
         String str = "奋兴社区居委会";
         String str2 = "石埗村委会";
         String[] arr = {"社区居委会", "村委会"};
         String res1 = StringUtil.replaceCustomBlank(str, arr, "村");
         String res2 = StringUtil.replaceCustomBlank(str2, arr, "村");
-        System.out.println(res1 +","+res2);
+        System.out.println(res1 + "," + res2);
 
     }
 }

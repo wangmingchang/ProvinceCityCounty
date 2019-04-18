@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 地区更新时间vo
+ *
  * @auther wangmingchang
  * @date 2019/4/10 09:24
  */

@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * 地区-controller
+ *
  * @auther wangmingchang
  * @date 2019/4/1 15:51
  */
@@ -26,22 +27,22 @@ public class AreaController {
     private AreaService areaService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView index(){
+    public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
         List<AreaUpdateLogVo> areaUpdateLogVos = areaService.queryUpdateLog();
-        modelAndView.addObject("areaUpdateLogVos",areaUpdateLogVos);
+        modelAndView.addObject("areaUpdateLogVos", areaUpdateLogVos);
         return modelAndView;
     }
 
     @RequestMapping(value = "/saveData", method = RequestMethod.POST)
     @ResponseBody
-    public AreaSaveVo saveData(HttpServletRequest request){
+    public AreaSaveVo saveData(HttpServletRequest request) {
         String code = request.getParameter("code");
         String name = request.getParameter("name");
         AreaSaveVo areaSaveVo = new AreaSaveVo();
         try {
             areaSaveVo = areaService.saveData(code, name);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return areaSaveVo;

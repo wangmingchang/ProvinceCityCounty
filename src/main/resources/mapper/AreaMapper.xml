@@ -1,126 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.wangmingchang.provincecitycounty.dao.AreaDao">
-  <resultMap id="BaseResultMap" type="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
-    <id column="code" jdbcType="VARCHAR" property="code" />
-    <result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-  	`code`, `parent_code`, `name`, 
-  	`create_time`
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from area
-    where 
-    `code` = #{code,jdbcType=VARCHAR}
-  </select>
-  
-  <select id="selectBySelective" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from area 
-    where 
-    <trim prefixOverrides="AND">
-	    <if test="code != null">
-	    	AND `code` = #{code,jdbcType=VARCHAR}  
-	    </if>
-	    <if test="parentCode != null">
-	    	AND `parent_code` = #{parentCode,jdbcType=VARCHAR}  
-	    </if>
-	    <if test="name != null">
-	    	AND `name` = #{name,jdbcType=VARCHAR}  
-	    </if>
-	    <if test="createTime != null">
-	    	AND `create_time` = #{createTime,jdbcType=TIMESTAMP}  
-	    </if>
-    </trim>
-  </select>  
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from area
-    where 
-    `code` = #{code,jdbcType=VARCHAR}
-  </delete>
-  
-  <insert id="insert" parameterType="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
-    insert into area (
-	  	`code`, `parent_code`, `name`, 
-	  	`create_time`
-    )
-    values (
-    #{code,jdbcType=VARCHAR},     #{parentCode,jdbcType=VARCHAR},     #{name,jdbcType=VARCHAR}, 
-    #{createTime,jdbcType=TIMESTAMP}    )
-  </insert>
-  
-  <insert id="insertSelective" parameterType="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
-    insert into area
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="code != null">
-        `code`, 
-      </if>
-      <if test="parentCode != null">
-        `parent_code`, 
-      </if>
-      <if test="name != null">
-        `name`, 
-      </if>
-      <if test="createTime != null">
-        `create_time`, 
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR}, 
-      </if>
-      <if test="parentCode != null">
-        #{parentCode,jdbcType=VARCHAR}, 
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR}, 
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP}, 
-      </if>
-    </trim>
-  </insert>
-  
-  <update id="updateByPrimaryKeySelective" parameterType="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
-    update area
-    <set>
-	    <trim suffixOverrides=",">
-		      <if test="code != null">
-		        `code` = #{code,jdbcType=VARCHAR}, 
-		      </if>
-		      <if test="parentCode != null">
-		        `parent_code` = #{parentCode,jdbcType=VARCHAR}, 
-		      </if>
-		      <if test="name != null">
-		        `name` = #{name,jdbcType=VARCHAR}, 
-		      </if>
-		      <if test="createTime != null">
-		        `create_time` = #{createTime,jdbcType=TIMESTAMP}, 
-		      </if>
-	    </trim>
-    </set>
-    where 
-    `code` = #{code,jdbcType=VARCHAR} 
-  </update>
-  
-  <update id="updateByPrimaryKey" parameterType="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
-    update area
-    set 
-    <trim suffixOverrides=",">
-      `code` = #{code,jdbcType=VARCHAR}, 
-      `parent_code` = #{parentCode,jdbcType=VARCHAR}, 
-      `name` = #{name,jdbcType=VARCHAR}, 
-      `create_time` = #{createTime,jdbcType=TIMESTAMP}, 
-    </trim>
-    where 
-    `code` = #{code,jdbcType=VARCHAR} 
-  </update>
+    <resultMap id="BaseResultMap" type="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
+        <id column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="parent_code" jdbcType="VARCHAR" property="parentCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `code`, `parent_code`, `name`,
+        `create_time`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from area
+        where
+        `code` = #{code,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectBySelective" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from area
+        where
+        <trim prefixOverrides="AND">
+            <if test="code != null">
+                AND `code` = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="parentCode != null">
+                AND `parent_code` = #{parentCode,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                AND `name` = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                AND `create_time` = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from area
+        where
+        `code` = #{code,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
+        insert into area (
+        `code`, `parent_code`, `name`,
+        `create_time`
+        )
+        values (
+        #{code,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP} )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
+        insert into area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                `code`,
+            </if>
+            <if test="parentCode != null">
+                `parent_code`,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="createTime != null">
+                `create_time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null">
+                #{parentCode,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
+        update area
+        <set>
+            <trim suffixOverrides=",">
+                <if test="code != null">
+                    `code` = #{code,jdbcType=VARCHAR},
+                </if>
+                <if test="parentCode != null">
+                    `parent_code` = #{parentCode,jdbcType=VARCHAR},
+                </if>
+                <if test="name != null">
+                    `name` = #{name,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    `create_time` = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+            </trim>
+        </set>
+        where
+        `code` = #{code,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.github.wangmingchang.provincecitycounty.pojo.po.AreaPo">
+        update area
+        set
+        <trim suffixOverrides=",">
+            `code` = #{code,jdbcType=VARCHAR},
+            `parent_code` = #{parentCode,jdbcType=VARCHAR},
+            `name` = #{name,jdbcType=VARCHAR},
+            `create_time` = #{createTime,jdbcType=TIMESTAMP},
+        </trim>
+        where
+        `code` = #{code,jdbcType=VARCHAR}
+    </update>
 
 </mapper>

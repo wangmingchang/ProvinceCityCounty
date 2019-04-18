@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 地区保存vo
+ *
  * @auther wangmingchang
  * @date 2019/4/10 09:52
  */
@@ -15,15 +16,17 @@ public class AreaSaveVo implements Serializable {
     private boolean flag;
     /**
      * 成功更新时间
-      */
+     */
     private String updateTime;
 
     public AreaSaveVo(boolean flag, String updateTime) {
         this.flag = flag;
         this.updateTime = updateTime;
     }
+
     public AreaSaveVo() {
     }
+
     public boolean isFlag() {
         return flag;
     }

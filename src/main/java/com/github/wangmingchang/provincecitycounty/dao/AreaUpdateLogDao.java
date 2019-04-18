@@ -9,25 +9,26 @@ import java.util.Map;
 
 /**
  * 地区更新日志Dao类
+ *
  * @author 王明昌
  * @date 2019-04-09
  */
 @Repository
 public interface AreaUpdateLogDao {
-	
-	AreaUpdateLogPo selectByPrimaryKey(Integer id );
-	
-	List<AreaUpdateLogPo> selectBySelective(Map paramMap);
-	
-	int deleteByPrimaryKey(Integer id );
-	
-	int insert(AreaUpdateLogPo areaUpdateLogPo);
-	
-	int insertSelective(AreaUpdateLogPo areaUpdateLogPo);
-	
-	int updateByPrimaryKeySelective(AreaUpdateLogPo areaUpdateLogPo);
-	
-	int updateByPrimaryKey(AreaUpdateLogPo areaUpdateLogPo);
 
-	List<AreaUpdateLogVo> queryUpdateLog();
+    AreaUpdateLogPo selectByPrimaryKey(Integer id);
+
+    List<AreaUpdateLogPo> selectBySelective(Map paramMap);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(AreaUpdateLogPo areaUpdateLogPo);
+
+    int insertSelective(AreaUpdateLogPo areaUpdateLogPo);
+
+    int updateByPrimaryKeySelective(AreaUpdateLogPo areaUpdateLogPo);
+
+    int updateByPrimaryKey(AreaUpdateLogPo areaUpdateLogPo);
+
+    List<AreaUpdateLogVo> queryUpdateLog();
 }

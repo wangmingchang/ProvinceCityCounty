@@ -39,21 +39,22 @@ public class AreaServiceImpl implements AreaService {
     private static String CITY_PREFIX_URL = "CITY_PREFIX_URL";
     private static String COUNTY_PREFIX_URL = "COUNTY_PREFIX_URL";
     private static String TOWN_PREFIX_URL = "TOWN_PREFIX_URL";
-    private static String[] SUFFIX_NAME_ARR = {"社区居委会", "社区居民委员会","社区居居委会", "村委会", "居委会","村民委员会","社区居委会（筹）"};
+    private static String[] SUFFIX_NAME_ARR = {"社区居委会", "社区居民委员会", "社区居居委会", "村委会", "居委会", "村民委员会", "社区居委会（筹）"};
     private static String VILLAGE_NAME = "村";
     private static String STREET_NAME = "街";
     private static String GARDEN_NAME = "苑";
     private static String LANE_NAME = "坊";
     private static String[] STREET_REPETITION_NAME_ARR = {"街村"};
     private static String[] VILLAGE_REPETITION_NAME_ARR = {"村村"};
-    private static String[] GARDEN_REPETITION_NAME_ARR = {"苑村","居村"};
-    private static String[] LANE_REPETITION_NAME_ARR= {"坊村"};
+    private static String[] GARDEN_REPETITION_NAME_ARR = {"苑村", "居村"};
+    private static String[] LANE_REPETITION_NAME_ARR = {"坊村"};
     private static String[] OFFICE_NAME_ARR = {"办事处"};
 
     @Autowired
     private AreaDao areaDao;
     @Autowired
     private AreaUpdateLogDao areaUpdateLogDao;
+
     /**
      * 保存地区数据
      *
@@ -74,7 +75,7 @@ public class AreaServiceImpl implements AreaService {
         int provinceNum = areaDao.insertSelective(provinceAreaPo);
         LOG.info("保存省返回影响行数：" + provinceNum + "省code：" + code + "，省name:" + name + "，下一级URL:" + cityUrl);
         String cityHtml = HttpUtil.doGet(cityUrl);
-        if(StringUtil.isBlank(cityHtml)){
+        if (StringUtil.isBlank(cityHtml)) {
             return areaSaveVo;
         }
         Document cityDoc = Jsoup.parse(cityHtml);
@@ -89,7 +90,7 @@ public class AreaServiceImpl implements AreaService {
                 //有下一级，区、县
                 countyUrl = URL + countyUrl;
                 String countyHtml = HttpUtil.doGet(countyUrl);
-                if(StringUtil.isBlank(countyHtml)){
+                if (StringUtil.isBlank(countyHtml)) {
                     return areaSaveVo;
                 }
                 Document countyDoc = Jsoup.parse(countyHtml);
@@ -103,7 +104,7 @@ public class AreaServiceImpl implements AreaService {
                     if (StringUtils.isNoneBlank(townUrl)) {
                         townUrl = URL + townUrl;
                         String townHtml = HttpUtil.doGet(townUrl);
-                        if(StringUtil.isBlank(townHtml)){
+                        if (StringUtil.isBlank(townHtml)) {
                             return areaSaveVo;
                         }
                         Document townDoc = Jsoup.parse(townHtml);
@@ -118,7 +119,7 @@ public class AreaServiceImpl implements AreaService {
                                 //村信息
                                 villageUrl = URL + villageUrl;
                                 String villageHtml = HttpUtil.doGet(villageUrl);
-                                if(StringUtil.isBlank(villageHtml)){
+                                if (StringUtil.isBlank(villageHtml)) {
                                     return areaSaveVo;
                                 }
                                 Document villageDoc = Jsoup.parse(villageHtml);
@@ -193,7 +194,7 @@ public class AreaServiceImpl implements AreaService {
                     name = StringUtil.replaceCustomBlank(name, VILLAGE_REPETITION_NAME_ARR, VILLAGE_NAME);
                 } else if (StringUtil.indexOf(name, GARDEN_REPETITION_NAME_ARR)) {
                     name = StringUtil.replaceCustomBlank(name, GARDEN_REPETITION_NAME_ARR, GARDEN_NAME);
-                }else if(StringUtil.indexOf(name, LANE_REPETITION_NAME_ARR)){
+                } else if (StringUtil.indexOf(name, LANE_REPETITION_NAME_ARR)) {
                     name = StringUtil.replaceCustomBlank(name, LANE_REPETITION_NAME_ARR, LANE_NAME);
                 }
             }
@@ -230,7 +231,7 @@ public class AreaServiceImpl implements AreaService {
      * @return
      */
     private String getTdText(Element element, int currntNum) {
-         LOG.info("element:" + element + ",currentNum:" + currntNum);
+        LOG.info("element:" + element + ",currentNum:" + currntNum);
         String text = null;
         if (currntNum == 4) {
             text = element.text();

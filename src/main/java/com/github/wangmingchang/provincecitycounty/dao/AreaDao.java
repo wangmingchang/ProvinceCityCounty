@@ -8,23 +8,24 @@ import java.util.Map;
 
 /**
  * 地区信息Dao类
+ *
  * @author 王明昌
  * @date 2019-04-01
  */
 @Repository
 public interface AreaDao {
-	
-	AreaPo selectByPrimaryKey(String code);
 
-	List<AreaPo> selectBySelective(Map paramMap);
+    AreaPo selectByPrimaryKey(String code);
 
-	int deleteByPrimaryKey(String code);
-	
-	int insert(AreaPo areaPo);
-	
-	int insertSelective(AreaPo areaPo);
-	
-	int updateByPrimaryKeySelective(AreaPo areaPo);
-	
-	int updateByPrimaryKey(AreaPo areaPo);
+    List<AreaPo> selectBySelective(Map paramMap);
+
+    int deleteByPrimaryKey(String code);
+
+    int insert(AreaPo areaPo);
+
+    int insertSelective(AreaPo areaPo);
+
+    int updateByPrimaryKeySelective(AreaPo areaPo);
+
+    int updateByPrimaryKey(AreaPo areaPo);
 }
