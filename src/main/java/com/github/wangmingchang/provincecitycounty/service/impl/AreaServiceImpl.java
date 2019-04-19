@@ -264,11 +264,6 @@ public class AreaServiceImpl implements AreaService {
     @Override
     @Transactional
     public List<AreaUpdateLogVo> queryUpdateLog() {
-        AreaUpdateLogPo areaUpdateLogPo = new AreaUpdateLogPo();
-        areaUpdateLogPo.setCode("xxx");
-        areaUpdateLogPo.setCreateTime(new Date());
-        List<AreaUpdateLogVo> areaUpdateLogVos = areaUpdateLogDao.queryUpdateLog();
-        int i = areaUpdateLogDao.insertSelective(areaUpdateLogPo);
-        return areaUpdateLogVos;
+        return areaUpdateLogDao.queryUpdateLog();
     }
 }
