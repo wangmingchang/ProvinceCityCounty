@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -261,7 +262,13 @@ public class AreaServiceImpl implements AreaService {
      * @return
      */
     @Override
+    @Transactional
     public List<AreaUpdateLogVo> queryUpdateLog() {
-        return areaUpdateLogDao.queryUpdateLog();
+        AreaUpdateLogPo areaUpdateLogPo = new AreaUpdateLogPo();
+        areaUpdateLogPo.setCode("xxx");
+        areaUpdateLogPo.setCreateTime(new Date());
+        List<AreaUpdateLogVo> areaUpdateLogVos = areaUpdateLogDao.queryUpdateLog();
+        int i = areaUpdateLogDao.insertSelective(areaUpdateLogPo);
+        return areaUpdateLogVos;
     }
 }
